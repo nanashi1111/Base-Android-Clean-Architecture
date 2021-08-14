@@ -1,0 +1,111 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.dtv.starter"
+        minSdkVersion 16
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled = true
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'BASE_URL', '"https://5e510330f2c0d300147c034c.mockapi.io/"'
+            buildConfigField 'boolean', 'LOGGABLE', 'false'
+        }
+        debug {
+            testCoverageEnabled true
+            debuggable true
+            buildConfigField 'String', 'BASE_URL', '"https://5e510330f2c0d300147c034c.mockapi.io/"'
+            buildConfigField 'boolean', 'LOGGABLE', 'true'
+        }
+    }
+
+    buildFeatures{
+        dataBinding {
+            enabled = true
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    implementation "androidx.lifecycle:lifecycle-extensions:2.2.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+
+
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1'
+
+    implementation dataDependencies.appCompat
+    implementation dataDependencies.material
+    implementation dataDependencies.constraintLayout
+
+    compileOnly dataDependencies.javaxAnnotation
+    implementation dataDependencies.javaxInject
+    implementation dataDependencies.gson
+    implementation dataDependencies.androidAnnotations
+
+    implementation dataDependencies.activityKtx
+    implementation dataDependencies.fragmentKtx
+    implementation dataDependencies.ktxCore
+    implementation dataDependencies.retrofit
+    implementation dataDependencies.retrofitGsonConverter
+    implementation dataDependencies.logger
+    implementation dataDependencies.multiDex
+    implementation dataDependencies.dexter
+    implementation dataDependencies.loggingInterceptor
+    implementation dataDependencies.hilt
+    kapt dataDependencies.hiltCompiler
+
+    implementation dataDependencies.reactiveStream
+    implementation dataDependencies.xRecyclerView
+    implementation dataDependencies.sdp
+    implementation dataDependencies.glide
+
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+
+    /*implementation 'com.google.dagger:hilt-android:2.35'
+    kapt 'com.google.dagger:hilt-android-compiler:2.35'
+
+
+    implementation("com.squareup.retrofit2:retrofit:2.9.0") {
+        exclude module: 'okhttp'
+    }
+    implementation "com.squareup.retrofit2:converter-gson:2.9.0"
+    implementation "com.squareup.okhttp3:okhttp:4.9.1"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:4.9.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
+    implementation "com.google.code.gson:gson:2.8.6"*/
+}
+
+repositories {
+    google()
+}
