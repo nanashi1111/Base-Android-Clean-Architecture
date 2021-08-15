@@ -26,6 +26,9 @@ ext {
     xRecyclerViewVersion = '1.6.0'
     sdpVersion = '1.0.6'
     glideVersion = '4.11.0'
+    lifeCycleKtxVersion = '2.3.1'
+    lifeCycleExtensionVersion = '2.2.0'
+    coroutineCoreVersion = '1.5.1'
 
 
     dataDependencies = [
@@ -51,6 +54,12 @@ ext {
             reactiveStream       : "androidx.lifecycle:lifecycle-reactivestreams-ktx:${reactiveStreamVersion}",
             xRecyclerView        : "com.jcodecraeer:xrecyclerview:${xRecyclerViewVersion}",
             sdp                  : "com.intuit.sdp:sdp-android:${sdpVersion}",
-            glide                : "com.github.bumptech.glide:glide:${glideVersion}"
+            glide                : "com.github.bumptech.glide:glide:${glideVersion}",
+            lifecycleExtension   : "androidx.lifecycle:lifecycle-extensions:${lifeCycleExtensionVersion}",
+            viewmodelKtx         : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifeCycleKtxVersion}",
+            runtimeKtx           : "androidx.lifecycle:lifecycle-runtime-ktx:${lifeCycleKtxVersion}",
+            livedataKtx          : "androidx.lifecycle:lifecycle-livedata-ktx:${lifeCycleKtxVersion}",
+            coroutineCore        : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutineCoreVersion}"
+
     ]
 }

@@ -1,6 +1,8 @@
 package com.cleanarchitectkotlinflowhiltsimplestway.presentation
 
 import android.app.Application
+import com.orhanobut.logger.AndroidLogAdapter
+import com.orhanobut.logger.Logger
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
@@ -12,6 +14,7 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        App.app = this
+        app = this
+        Logger.addLogAdapter(AndroidLogAdapter())
     }
 }
