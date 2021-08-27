@@ -7,6 +7,7 @@ import androidx.fragment.app.viewModels
 import com.cleanarchitectkotlinflowhiltsimplestway.R
 import com.cleanarchitectkotlinflowhiltsimplestway.databinding.FragmentSplashBinding
 import com.dtv.starter.presenter.base.BaseFragment
+import com.dtv.starter.presenter.utils.extension.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -27,6 +28,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>() {
     override fun subscribeData() {
         mViewModel.result.observe(this) {
             Log.d("Response", "Size: ${it.size}")
+            requireActivity().toast("Users count: ${it.size}")
         }
     }
 

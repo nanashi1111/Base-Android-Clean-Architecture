@@ -16,6 +16,7 @@ class SampleUseCase @Inject constructor(
         return flow {
             emit(State.LoadingState)
             try {
+                //Merge, map, handle anything before return it for viewModel
                 emit(State.DataState(userRepository.getUser()))
             } catch (e: Exception) {
                 emit(State.ErrorState(e))
