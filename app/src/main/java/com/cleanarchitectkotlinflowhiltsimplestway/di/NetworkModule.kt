@@ -2,9 +2,9 @@ package com.cleanarchitectkotlinflowhiltsimplestway.di
 
 
 import android.content.Context
+import com.cleanarchitectkotlinflowhiltsimplestway.BuildConfig
 import com.cleanarchitectkotlinflowhiltsimplestway.data.remote.Api
 import com.cleanarchitectkotlinflowhiltsimplestway.presentation.App
-import com.cleanarchitectkotlinflowhiltsimplestway.utils.Constants
 import com.google.gson.GsonBuilder
 import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
@@ -34,7 +34,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(client: OkHttpClient): Retrofit {
-        return Retrofit.Builder().baseUrl(Constants.BASE_URL).client(client)
+        return Retrofit.Builder().baseUrl(BuildConfig.BASE_URL).client(client)
             .addConverterFactory(GsonConverterFactory.create(GsonBuilder().create()))
             .build()
     }
@@ -72,6 +72,7 @@ class NetworkModule {
     fun provideHeaderInterceptor(): Interceptor {
         return Interceptor {
             val requestBuilder = it.request().newBuilder()
+            requestBuilder.addHeader("Authorization", BuildConfig.UNSPLASH_ACCESS_KEY)
             it.proceed(requestBuilder.build())
         }
     }
