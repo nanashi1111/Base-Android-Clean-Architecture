@@ -29,7 +29,7 @@ ext {
     lifeCycleKtxVersion = '2.3.1'
     lifeCycleExtensionVersion = '2.2.0'
     coroutineCoreVersion = '1.6.1'
-
+    chuckVersion = '1.1.0'
 
     dataDependencies = [
             okHttp               : "com.squareup.okhttp:okhttp:${okHttpVersion}",
@@ -59,7 +59,8 @@ ext {
             viewmodelKtx         : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifeCycleKtxVersion}",
             runtimeKtx           : "androidx.lifecycle:lifecycle-runtime-ktx:${lifeCycleKtxVersion}",
             livedataKtx          : "androidx.lifecycle:lifecycle-livedata-ktx:${lifeCycleKtxVersion}",
-            coroutineCore        : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutineCoreVersion}"
-
+            coroutineCore        : "org.jetbrains.kotlinx:kotlinx-coroutines-core:${coroutineCoreVersion}",
+            chuckDebug           : "com.readystatesoftware.chuck:library:${chuckVersion}",
+            chuckRelease           : "com.readystatesoftware.chuck:library-no-op:${chuckVersion}",
     ]
 }

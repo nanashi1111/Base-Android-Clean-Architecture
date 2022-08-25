@@ -1,3 +1,3 @@
 package com.cleanarchitectkotlinflowhiltsimplestway.data.entity
 
-data class User (val name: String)
+data class UserEntity (val name: String)

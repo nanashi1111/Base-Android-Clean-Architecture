@@ -6,6 +6,7 @@ import com.cleanarchitectkotlinflowhiltsimplestway.data.remote.Api
 import com.cleanarchitectkotlinflowhiltsimplestway.presentation.App
 import com.cleanarchitectkotlinflowhiltsimplestway.utils.Constants
 import com.google.gson.GsonBuilder
+import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -47,25 +48,30 @@ class NetworkModule {
     @Singleton
     fun provideOkHttpClient(
         headerInterceptor: Interceptor,
+        chuckInterceptor: ChuckInterceptor,
         cache: Cache
     ): OkHttpClient {
-
         val okHttpClientBuilder = OkHttpClient().newBuilder()
         okHttpClientBuilder.connectTimeout(CONNECTION_TIMEOUT.toLong(), TimeUnit.SECONDS)
         okHttpClientBuilder.readTimeout(READ_TIMEOUT.toLong(), TimeUnit.SECONDS)
         okHttpClientBuilder.writeTimeout(WRITE_TIMEOUT.toLong(), TimeUnit.SECONDS)
         okHttpClientBuilder.cache(cache)
         okHttpClientBuilder.addInterceptor(headerInterceptor)
+        okHttpClientBuilder.addInterceptor(chuckInterceptor)
         return okHttpClientBuilder.build()
     }
 
+    @Provides
+    @Singleton
+    fun provideChuckInterceptor(@ApplicationContext app: Context): ChuckInterceptor {
+        return ChuckInterceptor(app)
+    }
 
     @Provides
     @Singleton
     fun provideHeaderInterceptor(): Interceptor {
         return Interceptor {
             val requestBuilder = it.request().newBuilder()
-            //hear you can add all headers you want by calling 'requestBuilder.addHeader(name ,  value)'
             it.proceed(requestBuilder.build())
         }
     }

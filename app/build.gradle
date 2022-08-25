@@ -38,6 +38,9 @@ android {
         dataBinding {
             enabled = true
         }
+        viewBinding {
+            enabled = true
+        }
     }
 
     compileOptions {
@@ -84,6 +87,9 @@ dependencies {
     implementation dataDependencies.xRecyclerView
     implementation dataDependencies.sdp
     implementation dataDependencies.glide
+
+    debugImplementation dataDependencies.chuckDebug
+    releaseImplementation dataDependencies.chuckRelease
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
