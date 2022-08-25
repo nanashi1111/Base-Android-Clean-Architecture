@@ -1,13 +1,14 @@
 package com.cleanarchitectkotlinflowhiltsimplestway.presentation.topics
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.State
 import com.cleanarchitectkotlinflowhiltsimplestway.databinding.FragmentTopicsBinding
-import com.cleanarchitectkotlinflowhiltsimplestway.presentation.State
 import com.cleanarchitectkotlinflowhiltsimplestway.presentation.base.BaseViewBindingFragment
+import com.cleanarchitectkotlinflowhiltsimplestway.utils.extension.safeNavigate
 import com.dtv.starter.presenter.utils.extension.beVisibleIf
 import com.dtv.starter.presenter.utils.log.Logger
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,7 +19,9 @@ class TopicsFragment : BaseViewBindingFragment<FragmentTopicsBinding, TopicsView
     override val viewModel: TopicsViewModel  by viewModels()
 
     private val topicAdapter: TopicsAdapter by lazy {
-        TopicsAdapter(mutableListOf())
+        TopicsAdapter(mutableListOf()) {
+            findNavController().safeNavigate(TopicsFragmentDirections.actionTopicsFragmentToTopicDetailFragment(topic = it))
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +47,7 @@ class TopicsFragment : BaseViewBindingFragment<FragmentTopicsBinding, TopicsView
                 is State.ErrorState -> {
                     Logger.d("UserError: ${it.exception}")
                 }
+                else -> {}
             }
         }
     }

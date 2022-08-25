@@ -1,9 +1,8 @@
 package com.cleanarchitectkotlinflowhiltsimplestway.domain.usecase
 
+import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.State
 import com.cleanarchitectkotlinflowhiltsimplestway.domain.models.Topic
 import com.cleanarchitectkotlinflowhiltsimplestway.domain.repository.PhotoRepository
-import com.cleanarchitectkotlinflowhiltsimplestway.presentation.State
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

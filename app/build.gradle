@@ -3,10 +3,11 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
     defaultConfig {
@@ -93,6 +94,10 @@ dependencies {
     debugImplementation dataDependencies.chuckDebug
     releaseImplementation dataDependencies.chuckRelease
 
+    implementation dataDependencies.navigationFragmentKtx
+    implementation dataDependencies.navigationUiKtx
+
+    implementation 'androidx.work:work-runtime-ktx:2.7.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

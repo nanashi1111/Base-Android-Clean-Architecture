@@ -1,4 +1,4 @@
-package com.cleanarchitectkotlinflowhiltsimplestway.presentation
+package com.cleanarchitectkotlinflowhiltsimplestway.data.entity
 
 sealed class State<out T> {
     object LoadingState : State<Nothing>()

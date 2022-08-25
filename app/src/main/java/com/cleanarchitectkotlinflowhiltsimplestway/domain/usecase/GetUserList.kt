@@ -1,9 +1,9 @@
 package com.cleanarchitectkotlinflowhiltsimplestway.domain.usecase
 
+import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.State
 import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.UserEntity
 import com.cleanarchitectkotlinflowhiltsimplestway.domain.models.User
 import com.cleanarchitectkotlinflowhiltsimplestway.domain.repository.UserRepository
-import com.cleanarchitectkotlinflowhiltsimplestway.presentation.State
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject

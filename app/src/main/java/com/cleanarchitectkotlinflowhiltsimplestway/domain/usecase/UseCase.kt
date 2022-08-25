@@ -1,9 +1,8 @@
 package com.cleanarchitectkotlinflowhiltsimplestway.domain.usecase
 
-import com.cleanarchitectkotlinflowhiltsimplestway.presentation.State
+import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.State
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
-import retrofit2.HttpException
 
 abstract class UseCase<Output, Params> {
   operator fun invoke(param: Params): Flow<State<Output>> {

@@ -6,16 +6,13 @@ import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.provider.Settings
 import android.util.DisplayMetrics
 import android.util.TypedValue
-import android.view.View
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
-import com.dtv.starter.presenter.base.BaseFragment
 
 /**
  * Created by Ege Kuzubasioglu on 10.06.2018 at 01:00.
@@ -48,51 +45,7 @@ fun Context.toast(msg: Int) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show
 fun Context.longToast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
 fun Context.longToast(msg: Int) = Toast.makeText(this, msg, Toast.LENGTH_LONG).show()
 
-fun Activity.showActivity(
-    t: Class<*>,
-    bundle: Bundle? = null,
-    flags: Int? = null,
-    requestCode: Int? = null,
-    isShowAnim: Boolean = true
-) {
-    val intent = Intent(this, t)
-    bundle?.let {
-        intent.putExtras(it)
-    }
-    flags?.let {
-        intent.addFlags(it)
-    }
 
-    if (requestCode != null) {
-        startActivityForResult(intent, requestCode)
-    } else {
-        startActivity(intent)
-    }
-}
-
-fun BaseFragment<*, *>.showActivity(
-    t: Class<*>,
-    bundle: Bundle? = null,
-    flags: Int? = null,
-    requestCode: Int? = null,
-    isShowAnim: Boolean = true
-) {
-    activity?.let {
-        val intent = Intent(activity, t)
-        bundle?.let {
-            intent.putExtras(it)
-        }
-        flags?.let {
-            intent.addFlags(it)
-        }
-
-        if (requestCode != null) {
-            startActivityForResult(intent, requestCode)
-        } else {
-            startActivity(intent)
-        }
-    }
-}
 
 fun Context.getScreenWidth(): Float {
     val windowManager = this.getSystemService(Context.WINDOW_SERVICE) as WindowManager
