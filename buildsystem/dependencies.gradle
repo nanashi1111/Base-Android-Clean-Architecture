@@ -28,7 +28,7 @@ ext {
     glideVersion = '4.11.0'
     lifeCycleKtxVersion = '2.3.1'
     lifeCycleExtensionVersion = '2.2.0'
-    coroutineCoreVersion = '1.5.1'
+    coroutineCoreVersion = '1.6.1'
 
 
     dataDependencies = [

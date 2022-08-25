@@ -10,9 +10,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.lifecycleScope
 import com.cleanarchitectkotlinflowhiltsimplestway.utils.extension.isInternetAvailable
 import com.dtv.starter.presenter.utils.extension.displayKeyboard
 import com.dtv.starter.presenter.utils.log.Logger
+import kotlinx.coroutines.launch
 
 abstract class BaseFragment<Binding, BViewModel> :
     Fragment() where Binding : ViewDataBinding, BViewModel : ViewModel {
@@ -23,7 +25,10 @@ abstract class BaseFragment<Binding, BViewModel> :
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Logger.d("OnCreate ${tag}")
-        subscribeData()
+
+        lifecycleScope.launchWhenStarted {
+            subscribeData()
+        }
 
     }
 
@@ -65,5 +70,5 @@ abstract class BaseFragment<Binding, BViewModel> :
 
     protected abstract fun layoutId(): Int
     protected abstract fun initView()
-    protected abstract fun subscribeData()
+    protected abstract suspend fun subscribeData()
 }

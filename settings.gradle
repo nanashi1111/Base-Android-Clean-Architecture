@@ -1,2 +1,2 @@
-rootProject.name = "Clean Architect Kotlin Flow Hilt Simplest way"
+rootProject.name = "VuDuongBaseProject"
 include ':app'

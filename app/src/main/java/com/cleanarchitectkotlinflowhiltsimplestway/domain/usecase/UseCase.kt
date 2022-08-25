@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 
 abstract class UseCase<Output, Params>() {
-    abstract suspend operator fun invoke(param: Params): Flow<State<Output>>
+    abstract  operator fun invoke(param: Params): Flow<State<Output>>
 }

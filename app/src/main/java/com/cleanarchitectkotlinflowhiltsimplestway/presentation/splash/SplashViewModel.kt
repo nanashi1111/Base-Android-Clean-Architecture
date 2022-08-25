@@ -1,42 +1,28 @@
 package com.cleanarchitectkotlinflowhiltsimplestway.presentation.splash
 
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.User
-import com.cleanarchitectkotlinflowhiltsimplestway.domain.exception.resolveError
-import com.cleanarchitectkotlinflowhiltsimplestway.domain.usecase.SampleUseCase
+import com.cleanarchitectkotlinflowhiltsimplestway.domain.usecase.GetUserList
 import com.cleanarchitectkotlinflowhiltsimplestway.presentation.State
 import com.cleanarchitectkotlinflowhiltsimplestway.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.MutableSharedFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class SplashViewModel @Inject constructor(private val sampleUseCase: SampleUseCase) :
+class SplashViewModel @Inject constructor(private val getUserList: GetUserList) :
     BaseViewModel() {
 
-    val result: MutableLiveData<List<User>> = MutableLiveData()
+    val users = MutableSharedFlow<State<List<User>>>()
 
     fun getSampleResponse() {
-        viewModelScope.launch {
-            sampleUseCase.invoke(Unit).collect {
-                when (it) {
-                    is State.LoadingState -> loading.postValue(true)
-                    is State.ErrorState -> {
-                        loading.postValue(false)
-                        Log.d("ErrorAPI", "${it.exception.resolveError()}")
-
-                    }
-                    is State.DataState -> {
-                        result.postValue(it.data)
-                        Log.d("SuccessAPI", "${it.data.size}")
-
-                    }
-                }
+       viewModelScope.launch {
+            getUserList.invoke(Unit).collect {
+                users.emit(it)
             }
         }
+
     }
 
 
