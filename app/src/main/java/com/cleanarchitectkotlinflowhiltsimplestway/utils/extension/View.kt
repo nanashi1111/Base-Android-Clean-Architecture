@@ -3,6 +3,7 @@ package com.dtv.starter.presenter.utils.extension
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.content.res.Resources
+import android.graphics.Bitmap
 import android.graphics.Rect
 import android.view.*
 import android.webkit.WebSettings
@@ -15,6 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
 import com.cleanarchitectkotlinflowhiltsimplestway.R
@@ -99,6 +102,23 @@ fun ImageView.loadImageFitToImageView(
 ) {
     Glide.with(context).clear(this)
     val options = RequestOptions().centerCrop()
+    Glide.with(context).load(url).apply(options)
+        .placeholder(placeholderId)
+        .error(errorId)
+        .transition(DrawableTransitionOptions.withCrossFade()).into(this)
+}
+
+fun ImageView.loadImageFitToImageViewWithCorder(
+    url: String?,
+    topLeft: Float = 0f,
+    topRight: Float = 0f,
+    bottomLeft: Float = 0f,
+    bottomRight: Float = 0f,
+    placeholderId: Int = R.drawable.ic_loading_non_rounded_placeholder,
+    errorId: Int = R.drawable.ic_loading_non_rounded_error
+) {
+    Glide.with(context).clear(this)
+    val options = RequestOptions().centerCrop().transform(GranularRoundedCorners(topLeft, topRight, bottomRight, bottomLeft))
     Glide.with(context).load(url).apply(options)
         .placeholder(placeholderId)
         .error(errorId)

@@ -32,8 +32,7 @@
                 android:layout_width="match_parent"
                 bindTopicCover="@{topic.previewImage}"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/bg_sample_topic" />
+                android:scaleType="centerCrop"/>
 
             <View
                 android:layout_width="match_parent"

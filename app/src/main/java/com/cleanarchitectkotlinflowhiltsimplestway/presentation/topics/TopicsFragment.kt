@@ -42,7 +42,6 @@ class TopicsFragment : BaseViewBindingFragment<FragmentTopicsBinding, TopicsView
             when (it) {
                 is State.DataState -> {
                     topicAdapter.append(it.data)
-                    //Toast.makeText(requireActivity(), "Topic count: ${it.data.size}", Toast.LENGTH_LONG).show()
                 }
                 is State.ErrorState -> {
                     Logger.d("UserError: ${it.exception}")
