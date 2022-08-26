@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_topic"
+    app:startDestination="@id/topicsFragment">
+
+    <fragment
+        android:id="@+id/topicsFragment"
+        android:name="com.cleanarchitectkotlinflowhiltsimplestway.presentation.topics.TopicsFragment"
+        android:label="TopicsFragment"
+        tools:layout="@layout/fragment_topics">
+        <action
+            android:id="@+id/action_topicsFragment_to_topicDetailFragment"
+            app:destination="@id/topicDetailFragment"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim">
+
+            <argument
+                android:name="topic"
+                app:argType="com.cleanarchitectkotlinflowhiltsimplestway.domain.models.Topic"
+                app:nullable="false" />
+
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/topicDetailFragment"
+        android:name="com.cleanarchitectkotlinflowhiltsimplestway.presentation.topics.detail.TopicDetailFragment"
+        android:label="TopicDetailFragment"
+        tools:layout="@layout/fragment_topic_detail">
+        <argument
+            android:name="topic"
+            app:argType="com.cleanarchitectkotlinflowhiltsimplestway.domain.models.Topic"
+            app:nullable="false" />
+
+    </fragment>
+</navigation>
