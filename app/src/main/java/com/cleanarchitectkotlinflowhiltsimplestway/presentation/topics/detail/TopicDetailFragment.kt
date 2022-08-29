@@ -62,7 +62,7 @@ class TopicDetailFragment: BaseViewBindingFragment<FragmentTopicDetailBinding, T
   }
 
   override suspend fun subscribeData() {
-    viewModel.photos.collect {
+    viewModel.photos.safeCollect {
       viewBinding.pbLoading.beVisibleIf(it is State.LoadingState)
       when (it) {
         is State.DataState -> {
