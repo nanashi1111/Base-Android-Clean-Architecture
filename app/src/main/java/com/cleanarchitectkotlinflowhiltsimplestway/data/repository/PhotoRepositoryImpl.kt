@@ -1,6 +1,5 @@
 package com.cleanarchitectkotlinflowhiltsimplestway.data.repository
 
-import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.PhotoEntity
 import com.cleanarchitectkotlinflowhiltsimplestway.data.remote.Api
 import com.cleanarchitectkotlinflowhiltsimplestway.domain.repository.PhotoRepository
 import javax.inject.Inject

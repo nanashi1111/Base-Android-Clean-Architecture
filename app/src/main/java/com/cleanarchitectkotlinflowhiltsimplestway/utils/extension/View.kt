@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.request.RequestOptions
@@ -118,8 +119,9 @@ fun ImageView.loadImageFitToImageViewWithCorder(
     errorId: Int = R.drawable.ic_loading_non_rounded_error
 ) {
     Glide.with(context).clear(this)
-    val options = RequestOptions().centerCrop().transform(GranularRoundedCorners(topLeft, topRight, bottomRight, bottomLeft))
-    Glide.with(context).load(url).apply(options)
+    val transitionOptions = MultiTransformation(CenterCrop(),GranularRoundedCorners(topLeft, topRight, bottomRight, bottomLeft) )
+    Glide.with(context).load(url)
+        .transform(transitionOptions)
         .placeholder(placeholderId)
         .error(errorId)
         .transition(DrawableTransitionOptions.withCrossFade()).into(this)

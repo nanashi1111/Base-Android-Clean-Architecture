@@ -97,6 +97,8 @@ dependencies {
     implementation dataDependencies.navigationFragmentKtx
     implementation dataDependencies.navigationUiKtx
 
+    implementation "androidx.paging:paging-runtime:3.0.0-alpha12"
+
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
