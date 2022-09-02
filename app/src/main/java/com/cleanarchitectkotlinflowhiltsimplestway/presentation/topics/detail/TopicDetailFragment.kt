@@ -10,6 +10,7 @@ import com.cleanarchitectkotlinflowhiltsimplestway.R
 import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.State
 import com.cleanarchitectkotlinflowhiltsimplestway.databinding.FragmentTopicDetailBinding
 import com.cleanarchitectkotlinflowhiltsimplestway.presentation.base.BaseViewBindingFragment
+import com.cleanarchitectkotlinflowhiltsimplestway.utils.extension.safeCollectFlow
 import com.dtv.starter.presenter.utils.extension.beVisibleIf
 import com.dtv.starter.presenter.utils.extension.loadImageFitToImageView
 import com.dtv.starter.presenter.utils.log.Logger
@@ -62,7 +63,7 @@ class TopicDetailFragment: BaseViewBindingFragment<FragmentTopicDetailBinding, T
   }
 
   override suspend fun subscribeData() {
-    viewModel.photos.safeCollect {
+    safeCollectFlow(viewModel.photos) {
       viewBinding.pbLoading.beVisibleIf(it is State.LoadingState)
       when (it) {
         is State.DataState -> {

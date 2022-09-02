@@ -22,16 +22,6 @@ abstract class BaseViewBindingFragment<T : ViewBinding, VM : BaseViewModel>(priv
 
   abstract val viewModel: VM
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    lifecycleScope.launch {
-      repeatOnLifecycle(Lifecycle.State.STARTED) {
-        subscribeData()
-      }
-
-    }
-  }
-
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,
@@ -43,6 +33,7 @@ abstract class BaseViewBindingFragment<T : ViewBinding, VM : BaseViewModel>(priv
 
   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     super.onViewCreated(view, savedInstanceState)
+    lifecycleScope.launch { subscribeData() }
     initView()
   }
 
@@ -54,11 +45,4 @@ abstract class BaseViewBindingFragment<T : ViewBinding, VM : BaseViewModel>(priv
   abstract fun initView()
   abstract suspend fun subscribeData()
 
-  suspend fun <T> Flow<T>.safeCollect(action: suspend (T) -> Unit) {
-    lifecycleScope.launch {
-      collect { data ->
-        action.invoke(data)
-      }
-    }
-  }
 }

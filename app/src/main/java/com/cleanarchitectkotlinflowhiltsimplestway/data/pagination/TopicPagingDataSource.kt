@@ -26,4 +26,5 @@ class TopicPagingDataSource @Inject constructor(private val photoRepository: Pho
       return LoadResult.Error(e)
     }
   }
+
 }
