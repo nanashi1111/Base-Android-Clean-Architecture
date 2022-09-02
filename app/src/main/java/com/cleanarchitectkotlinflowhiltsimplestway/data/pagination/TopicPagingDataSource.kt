@@ -1,12 +1,12 @@
 package com.cleanarchitectkotlinflowhiltsimplestway.data.pagination
 
 import androidx.paging.PagingSource
-import com.cleanarchitectkotlinflowhiltsimplestway.domain.models.Topic
+import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.TopicEntity
 import com.cleanarchitectkotlinflowhiltsimplestway.domain.repository.PhotoRepository
 import javax.inject.Inject
 
-class TopicPagingDataSource @Inject constructor(private val photoRepository: PhotoRepository) : PagingSource<Int, Topic>() {
-  override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Topic> {
+class TopicPagingDataSource constructor(private val photoRepository: PhotoRepository) : PagingSource<Int, TopicEntity>() {
+  override suspend fun load(params: LoadParams<Int>): LoadResult<Int, TopicEntity> {
     try {
       val page = params.key ?: 1
       val data = photoRepository.getTopics(page)
@@ -16,9 +16,7 @@ class TopicPagingDataSource @Inject constructor(private val photoRepository: Pho
         null
       }
       return LoadResult.Page(
-        data = data.map {
-          Topic.fromEntity(it)
-        },
+        data = data,
         nextKey = nextPage,
         prevKey = null
       )

@@ -17,7 +17,7 @@ class TopicsViewModel @Inject constructor(getTopics: GetTopics) :
 
   val deleteEvent = MutableStateFlow(0L)
 
-   val topics = getTopics().cachedIn(viewModelScope).combine(deleteEvent) { data: PagingData<Topic>, event: Long ->
+   val topics = getTopics.invoke(Unit).cachedIn(viewModelScope).combine(deleteEvent) { data: PagingData<Topic>, event: Long ->
     Logger.d("Combine: $event")
     data.filter {
       if (event > 0) {

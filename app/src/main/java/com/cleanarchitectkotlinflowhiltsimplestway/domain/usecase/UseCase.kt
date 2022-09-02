@@ -22,9 +22,9 @@ abstract class UseCase<Output, Params> {
   abstract fun buildFlow(param: Params): Flow<State<Output>>
 }
 
-abstract class PagingUseCase<Output: Any> {
-   operator fun invoke(): Flow<PagingData<Output>> {
-    return buildFlow().flowOn(Dispatchers.IO)
+abstract class PagingUseCase<Output: Any, Params> {
+   operator fun invoke(params: Params): Flow<PagingData<Output>> {
+    return buildFlow(params).flowOn(Dispatchers.IO)
   }
-  abstract  fun buildFlow(): Flow<PagingData<Output>>
+  abstract  fun buildFlow(params: Params): Flow<PagingData<Output>>
 }

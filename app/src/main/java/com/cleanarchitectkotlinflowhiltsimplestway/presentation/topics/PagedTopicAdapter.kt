@@ -27,7 +27,7 @@ class PagedTopicAdapter: PagingDataAdapter<Topic, PagedTopicAdapter.TopicViewHol
 
   var  onTopicSelected: ((Topic) -> Unit)? = null
 
-  override fun onBindViewHolder(holder: PagedTopicAdapter.TopicViewHolder, position: Int) {
+  override fun onBindViewHolder(holder: TopicViewHolder, position: Int) {
     val item = getItem(position)
     holder.binding.topic = item
     onTopicSelected?.let {
@@ -41,7 +41,7 @@ class PagedTopicAdapter: PagingDataAdapter<Topic, PagedTopicAdapter.TopicViewHol
     holder.binding.executePendingBindings()
   }
 
-  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PagedTopicAdapter.TopicViewHolder {
+  override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicViewHolder {
     return TopicViewHolder(DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.item_topic, parent, false))
   }
 

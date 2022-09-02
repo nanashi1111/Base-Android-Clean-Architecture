@@ -1,21 +1,42 @@
 package com.cleanarchitectkotlinflowhiltsimplestway.domain.usecase
 
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.PhotoEntity
 import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.State
+import com.cleanarchitectkotlinflowhiltsimplestway.data.pagination.PhotoPagingDataSource
 import com.cleanarchitectkotlinflowhiltsimplestway.domain.models.Photo
 import com.cleanarchitectkotlinflowhiltsimplestway.domain.repository.PhotoRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.zip
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
+class GetTopicPhotos @Inject constructor(private val photoRepository: PhotoRepository) : PagingUseCase<Photo, GetTopicPhotos.Params>() {
+  class Params(val topicId: String)
+
+  override fun buildFlow(params: Params): Flow<PagingData<Photo>> {
+    return Pager(
+      config = PagingConfig(10, 5),
+      pagingSourceFactory = { PhotoPagingDataSource(photoRepository, params.topicId) }
+    ).flow.map {
+      it.map {
+        Photo.fromEntity(it)
+      }
+    }
+  }
+
+}
+
+/*
 class GetTopicPhotos @Inject constructor(private val photoRepository: PhotoRepository) : UseCase<List<Photo>, GetTopicPhotos.Params>() {
 
   class Params(val topicId: String, val page: Int)
 
   override fun buildFlow(param: Params): Flow<State<List<Photo>>> {
-    /*play ground, use zip operator to zip 2 api calls then return the merged list*/
+    */
+/*play ground, use zip operator to zip 2 api calls then return the merged list*//*
+
     val f1 = flow {
       emit(photoRepository.getTopicDetail(param.topicId, param.page))
     }
@@ -50,7 +71,8 @@ class GetTopicPhotos @Inject constructor(private val photoRepository: PhotoRepos
 
     return result
 
-    /*return flow<State<List<Photo>>> {
+    */
+/*return flow<State<List<Photo>>> {
       val data = photoRepository.getTopicDetail(param.topicId, param.page)
       val photos = data.mapIndexed { index, photoEntity ->
         val photo = Photo.fromEntity(photoEntity)
@@ -64,6 +86,7 @@ class GetTopicPhotos @Inject constructor(private val photoRepository: PhotoRepos
         photo
       }
       emit(State.DataState(photos))
-    }*/
+    }*//*
+
   }
-}
+}*/

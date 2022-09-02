@@ -5,12 +5,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cleanarchitectkotlinflowhiltsimplestway.R
 import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.State
 import com.cleanarchitectkotlinflowhiltsimplestway.databinding.FragmentTopicDetailBinding
 import com.cleanarchitectkotlinflowhiltsimplestway.presentation.base.BaseViewBindingFragment
 import com.cleanarchitectkotlinflowhiltsimplestway.utils.extension.safeCollectFlow
+import com.cleanarchitectkotlinflowhiltsimplestway.utils.extension.safeCollectLatestFlow
 import com.dtv.starter.presenter.utils.extension.beVisibleIf
 import com.dtv.starter.presenter.utils.extension.loadImageFitToImageView
 import com.dtv.starter.presenter.utils.log.Logger
@@ -23,15 +25,12 @@ class TopicDetailFragment: BaseViewBindingFragment<FragmentTopicDetailBinding, T
 
   private val args: TopicDetailFragmentArgs by navArgs()
 
-  private val photoAdapter: PhotoAdapter by lazy {
-    PhotoAdapter(mutableListOf())
-  }
+  private val photoAdapter = PagedPhotoAdapter()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    lifecycleScope.launchWhenStarted {
+    lifecycleScope.launchWhenCreated {
       viewModel.initTopicData(args.topic)
-      viewModel.getTopicPhotos()
     }
   }
 
@@ -63,17 +62,9 @@ class TopicDetailFragment: BaseViewBindingFragment<FragmentTopicDetailBinding, T
   }
 
   override suspend fun subscribeData() {
-    safeCollectFlow(viewModel.photos) {
-      viewBinding.pbLoading.beVisibleIf(it is State.LoadingState)
-      when (it) {
-        is State.DataState -> {
-          photoAdapter.append(it.data)
-        }
-        is State.ErrorState -> {
-          Logger.d("UserError: ${it.exception}")
-        }
-        else -> {}
-      }
+    safeCollectLatestFlow(viewModel.photos) {
+      photoAdapter.submitData(it)
     }
+
   }
 }
