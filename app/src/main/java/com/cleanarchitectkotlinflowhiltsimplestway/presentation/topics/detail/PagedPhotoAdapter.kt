@@ -13,7 +13,7 @@ import com.cleanarchitectkotlinflowhiltsimplestway.databinding.ItemPhotoBinding
 import com.cleanarchitectkotlinflowhiltsimplestway.domain.models.Photo
 import com.dtv.starter.presenter.utils.extension.loadImageFitToImageViewWithCorder
 
-class PagedPhotoAdapter: PagingDataAdapter<Photo, PagedPhotoAdapter.PhotoViewHolder>(object :DiffUtil.ItemCallback<Photo>() {
+class PagedPhotoAdapter (val onPhotoSelected: (Photo) -> Unit): PagingDataAdapter<Photo, PagedPhotoAdapter.PhotoViewHolder>(object :DiffUtil.ItemCallback<Photo>() {
   override fun areItemsTheSame(oldItem: Photo, newItem: Photo): Boolean {
     return oldItem.raw == newItem.raw
   }
@@ -30,6 +30,9 @@ class PagedPhotoAdapter: PagingDataAdapter<Photo, PagedPhotoAdapter.PhotoViewHol
     val photo = getItem(position)
     holder.binding.photo = photo
     holder.binding.executePendingBindings()
+    holder.binding.root.setOnClickListener {
+      photo?.let { onPhotoSelected(it) }
+    }
   }
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {

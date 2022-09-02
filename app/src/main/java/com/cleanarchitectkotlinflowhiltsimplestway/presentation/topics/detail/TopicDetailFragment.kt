@@ -8,10 +8,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.cleanarchitectkotlinflowhiltsimplestway.R
 import com.cleanarchitectkotlinflowhiltsimplestway.databinding.FragmentTopicDetailBinding
 import com.cleanarchitectkotlinflowhiltsimplestway.presentation.base.BaseViewBindingFragment
 import com.cleanarchitectkotlinflowhiltsimplestway.utils.extension.safeCollectLatestFlow
+import com.cleanarchitectkotlinflowhiltsimplestway.utils.extension.safeNavigate
 import com.dtv.starter.presenter.utils.extension.beVisibleIf
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +22,16 @@ class TopicDetailFragment: BaseViewBindingFragment<FragmentTopicDetailBinding, T
 
   private val args: TopicDetailFragmentArgs by navArgs()
 
-  private val photoAdapter = PagedPhotoAdapter()
+  private val photoAdapter = PagedPhotoAdapter {
+    findNavController().safeNavigate(
+      TopicDetailFragmentDirections.actionTopicDetailFragmentToPhotoFragment(it)
+    )
+  }
+
+  private val concatAdapter: ConcatAdapter by lazy {
+    val headerAdapter = HeaderAdapter(args.topic)
+    ConcatAdapter(headerAdapter, photoAdapter)
+  }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -41,8 +50,6 @@ class TopicDetailFragment: BaseViewBindingFragment<FragmentTopicDetailBinding, T
 
       //Photo list
       rvImages.apply {
-        val headerAdapter = HeaderAdapter(args.topic)
-        val concatAdapter = ConcatAdapter(headerAdapter, photoAdapter)
         adapter = concatAdapter
         layoutManager = GridLayoutManager(requireContext(),3).apply {
           spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {

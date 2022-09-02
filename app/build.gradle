@@ -98,6 +98,7 @@ dependencies {
     implementation dataDependencies.navigationUiKtx
 
     implementation "androidx.paging:paging-runtime:3.0.0-alpha12"
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
     testImplementation 'junit:junit:4.+'

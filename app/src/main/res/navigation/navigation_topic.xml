@@ -34,6 +34,27 @@
             android:name="topic"
             app:argType="com.cleanarchitectkotlinflowhiltsimplestway.domain.models.Topic"
             app:nullable="false" />
+        <action
+            android:id="@+id/action_topicDetailFragment_to_photoFragment"
+            app:destination="@id/photoFragment"
+            app:enterAnim="@anim/default_enter_anim"
+            app:exitAnim="@anim/default_exit_anim"
+            app:popEnterAnim="@anim/default_pop_enter_anim"
+            app:popExitAnim="@anim/default_pop_exit_anim">
+            <argument
+                android:name="photo"
+                app:argType="com.cleanarchitectkotlinflowhiltsimplestway.domain.models.Photo"
+                app:nullable="false" />
+        </action>
 
+    </fragment>
+    <fragment
+        android:id="@+id/photoFragment"
+        android:name="com.cleanarchitectkotlinflowhiltsimplestway.presentation.photo.PhotoFragment"
+        android:label="PhotoFragment">
+        <argument
+            android:name="photo"
+            app:argType="com.cleanarchitectkotlinflowhiltsimplestway.domain.models.Photo"
+            app:nullable="false" />
     </fragment>
 </navigation>
