@@ -27,7 +27,8 @@ class PagedPhotoAdapter: PagingDataAdapter<Photo, PagedPhotoAdapter.PhotoViewHol
   class PhotoViewHolder (val binding: ItemPhotoBinding): RecyclerView.ViewHolder(binding.root)
 
   override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
-    holder.binding.photo = getItem(position)
+    val photo = getItem(position)
+    holder.binding.photo = photo
     holder.binding.executePendingBindings()
   }
 

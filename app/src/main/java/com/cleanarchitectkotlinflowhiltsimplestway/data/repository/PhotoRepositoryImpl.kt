@@ -8,5 +8,5 @@ class PhotoRepositoryImpl @Inject constructor(private val api: Api) : PhotoRepos
 
   override suspend fun getTopics(page: Int) = api.getTopics(page)
 
-  override suspend fun getTopicDetail(topicId: String, page: Int) = api.getTopicPhotos(topicId, page)
+  override suspend fun getTopicDetail(topicId: String, page: Int) = api.getTopicPhotos(topicId, page = page)
 }

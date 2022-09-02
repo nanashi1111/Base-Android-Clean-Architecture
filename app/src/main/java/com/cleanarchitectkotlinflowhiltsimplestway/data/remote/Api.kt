@@ -15,5 +15,5 @@ interface Api {
     suspend fun getTopics(@Query("page") page: Int): List<TopicEntity>
 
     @GET("topics/{topicId}/photos")
-    suspend fun getTopicPhotos(@Path("topicId") topicId: String, @Query("page") page: Int): List<PhotoEntity>
+    suspend fun getTopicPhotos(@Path("topicId") topicId: String, @Query("page") page: Int, @Query("per_page") perPage: Int = 20): List<PhotoEntity>
 }

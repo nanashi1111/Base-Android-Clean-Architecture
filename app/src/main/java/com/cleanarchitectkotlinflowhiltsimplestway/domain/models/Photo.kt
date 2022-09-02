@@ -4,10 +4,10 @@ import com.cleanarchitectkotlinflowhiltsimplestway.data.entity.PhotoEntity
 
 data class Photo (val raw: String, val full: String, val thumb: String) {
 
-  var topLeftRadius: Float = 0f
-  var topRightRadius: Float = 0f
-  var bottomLeftRadius: Float = 0f
-  var bottomRightRadius: Float = 0f
+  var topLeftRadius: Float = 15f
+  var topRightRadius: Float = 15f
+  var bottomLeftRadius: Float = 15f
+  var bottomRightRadius: Float = 15f
 
   companion object {
     const val PHOTO_LIST_RADIUS = 5f

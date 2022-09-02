@@ -14,9 +14,10 @@ class GetTopics @Inject constructor(private val photoRepository: PhotoRepository
     return Pager(
       config = PagingConfig(10,5),
       pagingSourceFactory = { TopicPagingDataSource(photoRepository) }
-    ).flow.map {
-      it.map {
-        Topic.fromEntity(it)
+    ).flow.map { pagingData ->
+      pagingData.map {
+        entity ->
+        Topic.fromEntity(entity)
       }
     }
 
