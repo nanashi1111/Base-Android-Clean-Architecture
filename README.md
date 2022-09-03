@@ -12,17 +12,11 @@
 - Get the photos in each topic
 - View, Download photos
 
-## Demo
-<img src="topics.png" alt="drawing" width="250"/>
-<img src="topic_detail.png" alt="drawing" width="250"/>
-<img src="photo_detail.png" alt="drawing" width="250"/>
+## Screens
+Topics             |  Topc detail          | View and dowload photo
+:-------------------------:|:-------------------------:|:-------------------------:
+![](topics.png)  |  ![](topic_detail.png) | ![](photo_detail.png)
 
-
-## Video
-<video width="320" height="712" controls>
-  <source src="video.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
 
 ## Build with
 
