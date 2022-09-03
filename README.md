@@ -8,9 +8,21 @@
 - Includes unit tests for Use cases, Repository, ViewModels, API Service response.
 
 ## Features
-- Get theme list from Unsplash API
+- Get topics list from Unsplash API
 - Get the photos in each topic
 - View, Download photos
+
+## Demo
+<img src="topics.png" alt="drawing" width="250"/>
+<img src="topic_detail.png" alt="drawing" width="250"/>
+<img src="photo_detail.png" alt="drawing" width="250"/>
+
+
+## Video
+<video width="320" height="712" controls>
+  <source src="video.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Build with
 
