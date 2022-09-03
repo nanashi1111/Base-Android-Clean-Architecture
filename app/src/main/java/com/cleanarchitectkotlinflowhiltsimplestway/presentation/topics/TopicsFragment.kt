@@ -4,10 +4,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cleanarchitectkotlinflowhiltsimplestway.R
 import com.cleanarchitectkotlinflowhiltsimplestway.databinding.FragmentTopicsBinding
 import com.cleanarchitectkotlinflowhiltsimplestway.presentation.base.BaseViewBindingFragment
 import com.cleanarchitectkotlinflowhiltsimplestway.utils.extension.safeCollectLatestFlow
 import com.cleanarchitectkotlinflowhiltsimplestway.utils.extension.safeNavigate
+import com.dtv.starter.presenter.utils.extension.beGone
 import com.dtv.starter.presenter.utils.log.Logger
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,6 +30,10 @@ class TopicsFragment : BaseViewBindingFragment<FragmentTopicsBinding, TopicsView
         with(viewBinding) {
             rvTopics.layoutManager = LinearLayoutManager(requireContext())
             rvTopics.adapter = topicAdapter
+            with(layoutToolbar) {
+                ivBack.beGone()
+                tvTitle.text = getString(R.string.topics)
+            }
         }
     }
 

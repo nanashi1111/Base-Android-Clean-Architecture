@@ -25,7 +25,7 @@
             app:cardCornerRadius="10sp"
             app:cardElevation="5sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintDimensionRatio="W, 9:16"
+            app:layout_constraintDimensionRatio="W, 6:16"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -53,7 +53,7 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:alpha="0.8"
                     android:ellipsize="end"
-                    android:maxLines="3"
+                    android:maxLines="1"
                     android:textColor="@color/white"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="parent"

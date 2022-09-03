@@ -59,7 +59,6 @@ class PhotoFragment: BaseViewBindingFragment<FragmentPhotoBinding, PhotoViewMode
     viewBinding.ivImage.apply {
       Glide.with(requireContext()).clear(this)
       Glide.with(context).load(photo.full)
-        .placeholder(R.drawable.ic_loading_non_rounded_placeholder)
         .error(R.drawable.ic_loading_non_rounded_error)
         .transition(DrawableTransitionOptions.withCrossFade()).into(this)
     }
